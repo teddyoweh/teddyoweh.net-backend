@@ -1,2 +1,1 @@
-# teddyoweh.net-backend
- Backend API System for teddyoweh.net
+# TeddyOweh.net Backend.
