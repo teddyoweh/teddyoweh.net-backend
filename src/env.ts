@@ -7,9 +7,10 @@ const { networkInterfaces } = require('os');
 export class Env{
     env(){
         
-       return { URI:process.env.DB}
+       return { URI:process.env.DB,PORT:process.env.PORT}
 
     }
+
     ip(){
 
       
