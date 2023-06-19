@@ -14,7 +14,7 @@ const Project = new project_model_1.ProjectModel().project();
 const Tags = new ProjectTags_model_1.ProjectTagsModel().tag();
 let ProjectService = class ProjectService {
     async getLanding() {
-        const tags = await Tags.find().distinct('tag').lean();
+        const tags = await Tags.find();
         const projects = await Project.find().lean();
         return { tags, projects };
     }

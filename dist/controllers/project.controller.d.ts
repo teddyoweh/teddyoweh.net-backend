@@ -29,7 +29,15 @@ export declare class ProjectController {
     private readonly projectService;
     constructor(projectService: ProjectService);
     findAll(request: Request): Promise<{
-        tags: any[];
+        tags: (import("mongoose").Document<unknown, {}, {
+            date: Date;
+            tag?: string;
+        }> & Omit<{
+            date: Date;
+            tag?: string;
+        } & {
+            _id: import("mongoose").Types.ObjectId;
+        }, never>)[];
         projects: (import("mongoose").FlattenMaps<{
             website: string;
             date: Date;

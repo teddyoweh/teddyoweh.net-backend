@@ -25,7 +25,15 @@
 /// <reference types="mongoose/types/inferschematype" />
 export declare class ProjectService {
     getLanding(): Promise<{
-        tags: any[];
+        tags: (import("mongoose").Document<unknown, {}, {
+            date: Date;
+            tag?: string;
+        }> & Omit<{
+            date: Date;
+            tag?: string;
+        } & {
+            _id: import("mongoose").Types.ObjectId;
+        }, never>)[];
         projects: (import("mongoose").FlattenMaps<{
             website: string;
             date: Date;
