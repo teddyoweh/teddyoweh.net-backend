@@ -8,6 +8,7 @@ export declare class ViewsModel {
         pageviewed?: string;
         browser?: any;
         operatingSystem?: any;
+        browserid?: string;
     }, {}, {}, {}, mongoose.Document<unknown, {}, {
         date: Date;
         viewedno: number;
@@ -16,6 +17,7 @@ export declare class ViewsModel {
         pageviewed?: string;
         browser?: any;
         operatingSystem?: any;
+        browserid?: string;
     }> & Omit<{
         date: Date;
         viewedno: number;
@@ -24,6 +26,7 @@ export declare class ViewsModel {
         pageviewed?: string;
         browser?: any;
         operatingSystem?: any;
+        browserid?: string;
     } & {
         _id: mongoose.Types.ObjectId;
     }, never>, mongoose.Schema<any, mongoose.Model<any, any, any, any, any, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, {
@@ -34,6 +37,7 @@ export declare class ViewsModel {
         pageviewed?: string;
         browser?: any;
         operatingSystem?: any;
+        browserid?: string;
     }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
         date: Date;
         viewedno: number;
@@ -42,6 +46,7 @@ export declare class ViewsModel {
         pageviewed?: string;
         browser?: any;
         operatingSystem?: any;
+        browserid?: string;
     }>> & Omit<mongoose.FlatRecord<{
         date: Date;
         viewedno: number;
@@ -50,6 +55,7 @@ export declare class ViewsModel {
         pageviewed?: string;
         browser?: any;
         operatingSystem?: any;
+        browserid?: string;
     }> & {
         _id: mongoose.Types.ObjectId;
     }, never>>>;

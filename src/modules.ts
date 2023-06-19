@@ -2,14 +2,15 @@ import { Module } from '@nestjs/common';
  
 import { ViewsModule } from './module/views.module';
 import { HomeModule } from './module/home.module';
- 
+import { ProjectModule } from './module/project.module';
 @Module({
   imports: [
  
     ViewsModule,
-    HomeModule
+    HomeModule,
+    ProjectModule
  
-    // Add more modules here
+
   ],
 })
 export class APIModules {}

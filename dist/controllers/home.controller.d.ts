@@ -38,6 +38,7 @@ export declare class HomeController {
             pageviewed?: string;
             browser?: any;
             operatingSystem?: any;
+            browserid?: string;
         }> & Omit<{
             date: Date;
             viewedno: number;
@@ -46,6 +47,7 @@ export declare class HomeController {
             pageviewed?: string;
             browser?: any;
             operatingSystem?: any;
+            browserid?: string;
         } & {
             _id: import("mongoose").Types.ObjectId;
         }, never>)[];
@@ -59,6 +61,7 @@ export declare class HomeController {
             pageviewed?: string;
             browser?: any;
             operatingSystem?: any;
+            browserid?: string;
         }> & Omit<{
             date: Date;
             viewedno: number;
@@ -67,6 +70,7 @@ export declare class HomeController {
             pageviewed?: string;
             browser?: any;
             operatingSystem?: any;
+            browserid?: string;
         } & {
             _id: import("mongoose").Types.ObjectId;
         }, never>)[];
@@ -80,6 +84,7 @@ export declare class HomeController {
                 pageviewed?: string;
                 browser?: any;
                 operatingSystem?: any;
+                browserid?: string;
             }> & Omit<{
                 date: Date;
                 viewedno: number;
@@ -88,6 +93,7 @@ export declare class HomeController {
                 pageviewed?: string;
                 browser?: any;
                 operatingSystem?: any;
+                browserid?: string;
             } & {
                 _id: import("mongoose").Types.ObjectId;
             }, never>)[];

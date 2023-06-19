@@ -5,7 +5,7 @@ require('dotenv').config();
 const { networkInterfaces } = require('os');
 class Env {
     env() {
-        return { URI: process.env.DB };
+        return { URI: process.env.DB, PORT: process.env.PORT };
     }
     ip() {
         const nets = networkInterfaces();
