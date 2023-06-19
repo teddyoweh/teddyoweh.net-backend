@@ -17,7 +17,8 @@ export class ViewService {
         viewedno: body.viewedno,
         browser: body.browser,
         operatingSystem: body.operatingSystem,
-        date: body.date
+        date: body.date,
+        browserid:body.browserid
     });
     newView.save();
     return {};

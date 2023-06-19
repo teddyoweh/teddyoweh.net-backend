@@ -22,6 +22,9 @@ const ViewsSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    browserid:{
+        type:String
+    }
 
 
 });
