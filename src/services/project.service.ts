@@ -12,7 +12,7 @@ export class ProjectService {
  
   async getLanding(){
     const tags = await Tags.find();
-    const projects = await Project.find().lean();
+    const projects = await Project.find();
 
     return { tags, projects };
    
