@@ -5,9 +5,11 @@ import { NestFactory } from '@nestjs/core';
 import { APIModules } from './modules';
 import { Env } from './env';
 import mongoose from 'mongoose';
+import io from 'socket.io';
 import os, {platform } from 'os'
+import { ViewsModel } from './models/view.model';
 const env = new Env();
-
+const Views = new ViewsModel().view()
 
 async function bootstrap() {
   const app = await NestFactory.create(APIModules);
@@ -23,7 +25,8 @@ async function bootstrap() {
   );
 
   app.enableCors();
-  // const server = await app.listen(80,'0.0.0.0');
+   
+ 
   const server = await app.listen(env.env().PORT)
   const address = server.address();
   const host = address.address;

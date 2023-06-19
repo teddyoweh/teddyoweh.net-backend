@@ -22,15 +22,20 @@
   "dependencies": {
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/mongoose": "^10.0.0",
     "@nestjs/platform-express": "^9.4.0",
+    "@nestjs/platform-socket.io": "^10.0.1",
+    "@nestjs/websockets": "^10.0.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mongoose": "^7.1.0",
+    "http": "^0.0.1-security",
+    "mongoose": "^7.3.0",
     "os": "^0.1.2",
     "redis": "^4.6.6",
     "reflect-metadata": "^0.1.13",
     "request": "^2.88.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "socket.io": "^4.6.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
