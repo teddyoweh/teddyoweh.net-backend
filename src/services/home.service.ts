@@ -58,13 +58,13 @@ export class HomeService {
       }
   
       return {
-        todaysViews: todaysViews,
+        todaysViews: todaysViews.reverse(),
         totalViewsNo: totalViewsNo,
         monthViewsNo: monthViewsNo,
-        yesterdayViews: yesterdayViews,
+        yesterdayViews: yesterdayViews.reverse(),
         dayBeforeYesterdayViews: {
           day: dayBeforeYesterday.toISOString(),
-          views: dayBeforeYesterdayViews
+          views: dayBeforeYesterdayViews.reverse()
         },
         daysOfWeek: daysOfWeek,
         today: today,
