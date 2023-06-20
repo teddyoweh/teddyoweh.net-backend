@@ -7,7 +7,7 @@ function calculatePercentageChange(presentBoutNumber, pastBoutNumber) {
   const status = presentBoutNumber < pastBoutNumber ? 'decrease' : 'increase';
   
   return {
-    percentage: Math.abs(percentageChange),
+    percentage: percentageChange,
     status: status,
   };
 }
