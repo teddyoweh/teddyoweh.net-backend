@@ -155,7 +155,7 @@ export class HomeService {
       const currentDate1 = new Date(currentDate2.toLocaleString('en-US', options))
       const todayStart = new Date(currentDate1.getFullYear(), currentDate1.getMonth(), currentDate1.getDate());
       const todayEnd = new Date(currentDate1.getFullYear(), currentDate1.getMonth(), currentDate1.getDate() + 1);
-      const todaysViews =viewsData.filter((view) => view.date >= todayStart && view.date < todayEnd)
+      const todaysViews =viewsData.filter((view) => view.date >= todayStart )
   
       const yesterdayDate = new Date(currentDate1);
       yesterdayDate.setDate(currentDate1.getDate() - 1);
