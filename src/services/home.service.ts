@@ -145,10 +145,17 @@ export class HomeService {
     const ViewPoints = calculatePoints(viewsData)
     try {
       const today = new Date();
-      today.setHours(0, 0, 0, 0);  
-  
-      const todaysViews = await View.find({ date: { $gte: today } }).exec();
-      const totalViewsNo = await View.countDocuments().exec();
+      
+      const currentDate2 = new Date();
+ 
+      const options = {
+        timeZone: 'America/Los_Angeles',
+      };
+      
+      const currentDate1 = new Date(currentDate2.toLocaleString('en-US', options))
+      const todayStart = new Date(currentDate1.getFullYear(), currentDate1.getMonth(), currentDate1.getDate());
+      const todayEnd = new Date(currentDate1.getFullYear(), currentDate1.getMonth(), currentDate1.getDate() + 1);
+      const todaysViews =viewsData.filter((view) => view.date >= todayStart && view.date < todayEnd)
   
     
       const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -194,7 +201,7 @@ export class HomeService {
   
       const finalHash =  {
         todaysViews: todaysViews.reverse(),
-        totalViewsNo: totalViewsNo,
+     
         monthViewsNo: monthViewsNo,
         yesterdayViews: yesterdayViews.reverse(),
         dayBeforeYesterdayViews: {
