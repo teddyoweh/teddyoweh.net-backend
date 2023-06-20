@@ -157,23 +157,29 @@ export class HomeService {
       const todayEnd = new Date(currentDate1.getFullYear(), currentDate1.getMonth(), currentDate1.getDate() + 1);
       const todaysViews =viewsData.filter((view) => view.date >= todayStart && view.date < todayEnd)
   
-    
+      const yesterdayDate = new Date(currentDate1);
+      yesterdayDate.setDate(currentDate1.getDate() - 1);
+      const yesterdayStart = new Date(yesterdayDate.getFullYear(), yesterdayDate.getMonth(), yesterdayDate.getDate());
+      const yesterdayEnd = new Date(yesterdayDate.getFullYear(), yesterdayDate.getMonth(), yesterdayDate.getDate() + 1);
+      const yesterdayViews = viewsData.filter((view) => view.date >= yesterdayStart && view.date < yesterdayEnd)
+
+      const dayBeforeYesterdayDate = new Date(currentDate1);
+      dayBeforeYesterdayDate.setDate(currentDate1.getDate() - 2);
+      const dayBeforeYesterdayStart = new Date(dayBeforeYesterdayDate.getFullYear(), dayBeforeYesterdayDate.getMonth(), dayBeforeYesterdayDate.getDate());
+      const dayBeforeYesterdayEnd = new Date(dayBeforeYesterdayDate.getFullYear(), dayBeforeYesterdayDate.getMonth(), dayBeforeYesterdayDate.getDate() + 1);
+      const dayBeforeYesterdayViews = viewsData.filter((view) => view.date >= dayBeforeYesterdayStart && view.date < dayBeforeYesterdayEnd)
       const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
       const monthViewsNo = await View.countDocuments({ date: { $gte: startOfMonth } }).exec();
   
  
       const yesterday = new Date(today);
       yesterday.setDate(yesterday.getDate() - 1);
-      const yesterdayViews = await View.find({
-        date: { $gte: yesterday, $lt: today }
-      }).exec();
+     
   
  
       const dayBeforeYesterday = new Date(yesterday);
       dayBeforeYesterday.setDate(dayBeforeYesterday.getDate() - 1);
-      const dayBeforeYesterdayViews = await View.find({
-        date: { $gte: dayBeforeYesterday, $lt: yesterday }
-      }).exec();
+     
  
       const daysOfWeek = {};
       let currentDate = new Date(today);
