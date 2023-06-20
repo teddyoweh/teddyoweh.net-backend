@@ -126,18 +126,18 @@ export declare class HomeController {
         monthsPoints: {};
         daysPoints: {};
         hoursPoints: {
-            "0:00 - 2:00": number;
-            "2:00 - 4:00": number;
-            "4:00 - 6:00": number;
-            "6:00 - 8:00": number;
-            "8:00 - 10:00": number;
-            "10:00 - 12:00": number;
-            "12:00 - 14:00": number;
-            "14:00 - 16:00": number;
-            "16:00 - 18:00": number;
-            "18:00 - 20:00": number;
-            "20:00 - 22:00": number;
-            "22:00 - 24:00": number;
+            "0-2": number;
+            "2-4": number;
+            "4-6": number;
+            "6-8": number;
+            "8-10": number;
+            "10-12": number;
+            "12-14": number;
+            "14-16": number;
+            "16-18": number;
+            "18-20": number;
+            "20-22": number;
+            "22-24": number;
         };
     }>;
 }
