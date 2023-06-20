@@ -37,48 +37,49 @@ function calculatePercentageChange(presentBoutNumber, pastBoutNumber) {
     daysPoints[dayNames[day]] = dayViews;
   }
   const hoursPoints = {
-    "12AM": 0,
-    "2AM": 0,
-    "4AM": 0,
-    "6AM": 0,
-    "8AM": 0,
-    "10AM": 0,
-    "12PM": 0,
-    "2PM": 0,
-    "4PM": 0,
-    "6PM": 0,
-    "8PM": 0,
-    "10PM": 0,
+    "0": 0,
+    "2": 0,
+    "4": 0,
+    "6": 0,
+    "8": 0,
+    "10": 0,
+    "12": 0,
+    "14": 0,
+    "16": 0,
+    "18": 0,
+    "20": 0,
+    "22": 0,
   };
   
   viewsData.forEach((view) => {
     const viewHour = view.date.getHours();
     if (viewHour >= 0 && viewHour < 2) {
-      hoursPoints["12AM"] += 1;
+      hoursPoints["0"] += 1;
     } else if (viewHour >= 2 && viewHour < 4) {
-      hoursPoints["2AM"] += 1;
+      hoursPoints["2"] += 1;
     } else if (viewHour >= 4 && viewHour < 6) {
-      hoursPoints["4AM"] += 1;
+      hoursPoints["4"] += 1;
     } else if (viewHour >= 6 && viewHour < 8) {
-      hoursPoints["6AM"] += 1;
+      hoursPoints["6"] += 1;
     } else if (viewHour >= 8 && viewHour < 10) {
-      hoursPoints["8AM"] += 1;
+      hoursPoints["8"] += 1;
     } else if (viewHour >= 10 && viewHour < 12) {
-      hoursPoints["10AM"] += 1;
+      hoursPoints["10"] += 1;
     } else if (viewHour >= 12 && viewHour < 14) {
-      hoursPoints["12PM"] += 1;
+      hoursPoints["12"] += 1;
     } else if (viewHour >= 14 && viewHour < 16) {
-      hoursPoints["2PM"] += 1;
+      hoursPoints["14"] += 1;
     } else if (viewHour >= 16 && viewHour < 18) {
-      hoursPoints["4PM"] += 1;
+      hoursPoints["16"] += 1;
     } else if (viewHour >= 18 && viewHour < 20) {
-      hoursPoints["6PM"] += 1;
+      hoursPoints["18"] += 1;
     } else if (viewHour >= 20 && viewHour < 22) {
-      hoursPoints["8PM"] += 1;
+      hoursPoints["20"] += 1;
     } else if (viewHour >= 22 && viewHour <= 23) {
-      hoursPoints["10PM"] += 1;
+      hoursPoints["22"] += 1;
     }
   });
+  
   
   return {
     monthsPoints,
@@ -128,7 +129,8 @@ const currentDate = new Date(currentDate2.toLocaleString('en-US', options))
     weeklyPercentageChange,
     monthlyPercentageChange,
     totalPercentageChange,
-    date:currentDate 
+    date:currentDate,
+    viewsData
   };
 }
 
