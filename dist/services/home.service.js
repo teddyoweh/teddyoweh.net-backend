@@ -10,11 +10,55 @@ exports.HomeService = void 0;
 const common_1 = require("@nestjs/common");
 const view_model_1 = require("../models/view.model");
 const View = new view_model_1.ViewsModel().view();
+function calculatePercentageChange(presentBoutNumber, pastBoutNumber) {
+    const percentageChange = ((presentBoutNumber - pastBoutNumber) / pastBoutNumber) * 100;
+    const status = presentBoutNumber < pastBoutNumber ? 'decrease' : 'increase';
+    return {
+        percentage: Math.abs(percentageChange),
+        status: status,
+    };
+}
+function calculateViewsStatistics(viewsData) {
+    const currentDate = new Date();
+    const todayStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+    const todayEnd = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
+    const thisWeekStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - currentDate.getDay());
+    const thisWeekEnd = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - currentDate.getDay() + 7);
+    const thisMonthStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    const thisMonthEnd = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+    const lastDayStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - 1);
+    const lastDayEnd = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+    const lastWeekStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - currentDate.getDay() - 7);
+    const lastWeekEnd = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - currentDate.getDay());
+    const lastMonthStart = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+    const lastMonthEnd = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+    const totalViews = viewsData.length;
+    const todayViews = viewsData.filter((view) => view.date >= todayStart && view.date < todayEnd).length;
+    const thisWeekViews = viewsData.filter((view) => view.date >= thisWeekStart && view.date < thisWeekEnd).length;
+    const thisMonthViews = viewsData.filter((view) => view.date >= thisMonthStart && view.date < thisMonthEnd).length;
+    const dailyPercentageChange = calculatePercentageChange(todayViews, viewsData.filter((view) => view.date >= lastDayStart && view.date < lastDayEnd).length);
+    const weeklyPercentageChange = calculatePercentageChange(thisWeekViews, viewsData.filter((view) => view.date >= lastWeekStart && view.date < lastWeekEnd).length);
+    const monthlyPercentageChange = calculatePercentageChange(thisMonthViews, viewsData.filter((view) => view.date >= lastMonthStart && view.date < lastMonthEnd).length);
+    const totalPercentageChange = calculatePercentageChange(todayViews, totalViews);
+    return {
+        totalTimeViews: totalViews,
+        todayTotalViews: todayViews,
+        monthlyTotalViews: thisMonthViews,
+        weeklyTotalViews: thisWeekViews,
+        monthlyViews: thisMonthViews,
+        dailyPercentageChange,
+        weeklyPercentageChange,
+        monthlyPercentageChange,
+        totalPercentageChange,
+    };
+}
 let HomeService = class HomeService {
     getHello() {
         return 'Hello World!';
     }
     async getInitial() {
+        const viewsData = await View.find();
+        const ViewStats = calculateViewsStatistics(viewsData);
         try {
             const today = new Date();
             today.setHours(0, 0, 0, 0);
@@ -53,7 +97,7 @@ let HomeService = class HomeService {
                 timeHashMap[currentTime.toISOString()] = timeViews;
                 currentTime.setHours(currentTime.getHours() - 2);
             }
-            return {
+            const finalHash = {
                 todaysViews: todaysViews.reverse(),
                 totalViewsNo: totalViewsNo,
                 monthViewsNo: monthViewsNo,
@@ -66,6 +110,7 @@ let HomeService = class HomeService {
                 today: today,
                 timeHashMap: timeHashMap
             };
+            return Object.assign(Object.assign({}, ViewStats), finalHash);
         }
         catch (error) {
             console.error(error);

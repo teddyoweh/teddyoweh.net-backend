@@ -97,5 +97,26 @@ export declare class HomeService {
         daysOfWeek: {};
         today: Date;
         timeHashMap: {};
+        totalTimeViews: any;
+        todayTotalViews: any;
+        monthlyTotalViews: any;
+        weeklyTotalViews: any;
+        monthlyViews: any;
+        dailyPercentageChange: {
+            percentage: number;
+            status: string;
+        };
+        weeklyPercentageChange: {
+            percentage: number;
+            status: string;
+        };
+        monthlyPercentageChange: {
+            percentage: number;
+            status: string;
+        };
+        totalPercentageChange: {
+            percentage: number;
+            status: string;
+        };
     }>;
 }

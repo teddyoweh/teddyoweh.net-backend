@@ -34,7 +34,7 @@ export declare class ProjectService {
         } & {
             _id: import("mongoose").Types.ObjectId;
         }, never>)[];
-        projects: (import("mongoose").FlattenMaps<{
+        projects: (import("mongoose").Document<unknown, {}, {
             website: string;
             date: Date;
             languages: string[];
@@ -47,9 +47,22 @@ export declare class ProjectService {
             slug?: string;
             pypipackage?: string;
             documentation?: string;
-        }> & {
+        }> & Omit<{
+            website: string;
+            date: Date;
+            languages: string[];
+            tags: string[];
+            visible: boolean;
+            sourcecode?: string;
+            title?: string;
+            description?: string;
+            long_description?: string;
+            slug?: string;
+            pypipackage?: string;
+            documentation?: string;
+        } & {
             _id: import("mongoose").Types.ObjectId;
-        })[];
+        }, never>)[];
     }>;
     addProject(body: any): object;
     updateProject(projectId: any, updateData: any): Promise<import("mongoose").Document<unknown, {}, {
