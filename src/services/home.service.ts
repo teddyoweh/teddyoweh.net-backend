@@ -12,7 +12,13 @@ function calculatePercentageChange(presentBoutNumber, pastBoutNumber) {
   };
 }
 function calculateViewsStatistics(viewsData) {
-  const currentDate = new Date();
+  const currentDate2 = new Date();
+ 
+const options = {
+  timeZone: 'America/Los_Angeles',
+};
+
+const currentDate = new Date(currentDate2.toLocaleString('en-US', options))
   const todayStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
   const todayEnd = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
   const thisWeekStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - currentDate.getDay());
@@ -34,7 +40,7 @@ function calculateViewsStatistics(viewsData) {
   const dailyPercentageChange = calculatePercentageChange(todayViews, viewsData.filter((view) => view.date >= lastDayStart && view.date < lastDayEnd).length);
   const weeklyPercentageChange = calculatePercentageChange(thisWeekViews, viewsData.filter((view) => view.date >= lastWeekStart && view.date < lastWeekEnd).length);
   const monthlyPercentageChange = calculatePercentageChange(thisMonthViews, viewsData.filter((view) => view.date >= lastMonthStart && view.date < lastMonthEnd).length);
-  const totalPercentageChange = calculatePercentageChange(todayViews, totalViews);
+  const totalPercentageChange = calculatePercentageChange(totalViews,totalViews-todayViews);
   
   return {
     totalTimeViews: totalViews,
