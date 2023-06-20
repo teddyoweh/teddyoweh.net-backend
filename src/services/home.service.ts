@@ -53,29 +53,29 @@ function calculatePercentageChange(presentBoutNumber, pastBoutNumber) {
   viewsData.forEach((view) => {
     const viewHour = view.date.getHours();
     if (viewHour >= 0 && viewHour < 2) {
-      hoursPoints["0:00 - 2:00"] += 1;
+      hoursPoints["0-2"] += 1;
     } else if (viewHour >= 2 && viewHour < 4) {
-      hoursPoints["2:00 - 4:00"] += 1;
+      hoursPoints["2-4"] += 1;
     } else if (viewHour >= 4 && viewHour < 6) {
-      hoursPoints["4:00 - 6:00"] += 1;
+      hoursPoints["4-6"] += 1;
     } else if (viewHour >= 6 && viewHour < 8) {
-      hoursPoints["6:00 - 8:00"] += 1;
+      hoursPoints["6-8"] += 1;
     } else if (viewHour >= 8 && viewHour < 10) {
-      hoursPoints["8:00 - 10:00"] += 1;
+      hoursPoints["8-10"] += 1;
     } else if (viewHour >= 10 && viewHour < 12) {
-      hoursPoints["10:00 - 12:00"] += 1;
+      hoursPoints["10-12"] += 1;
     } else if (viewHour >= 12 && viewHour < 14) {
-      hoursPoints["12:00 - 14:00"] += 1;
+      hoursPoints["12-14"] += 1;
     } else if (viewHour >= 14 && viewHour < 16) {
-      hoursPoints["14:00 - 16:00"] += 1;
+      hoursPoints["14-16"] += 1;
     } else if (viewHour >= 16 && viewHour < 18) {
-      hoursPoints["16:00 - 18:00"] += 1;
+      hoursPoints["16-18"] += 1;
     } else if (viewHour >= 18 && viewHour < 20) {
-      hoursPoints["18:00 - 20:00"] += 1;
+      hoursPoints["18-20"] += 1;
     } else if (viewHour >= 20 && viewHour < 22) {
-      hoursPoints["20:00 - 22:00"] += 1;
+      hoursPoints["20-22"] += 1;
     } else if (viewHour >= 22 && viewHour <= 23) {
-      hoursPoints["22:00 - 24:00"] += 1;
+      hoursPoints["22-24"] += 1;
     }
   });
   return {
