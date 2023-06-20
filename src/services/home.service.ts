@@ -20,34 +20,36 @@ function calculatePercentageChange(presentBoutNumber, pastBoutNumber) {
   const daysPoints = {};
   const todayPoints = {};
 
+ 
 
   for (let month = 0; month < 12; month++) {
     const monthViews = viewsData.filter(
-      (view) => view.date.getFullYear() === currentYear && view.date.getMonth() === month
+      (view) => view.date.getMonth() === month
     ).length;
-    monthsPoints[new Date(currentYear, month).toLocaleString('default', { month: 'long' })] = monthViews;
+    const monthName = new Date(0, month).toLocaleString('default', { month: 'short' });
+    monthsPoints[monthName] = monthViews;
   }
 
 
-  const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const dayNames = ['Sun', 'Mond', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
   for (let day = 0; day < 7; day++) {
     const dayViews = viewsData.filter((view) => view.date.getDay() === day).length;
     daysPoints[dayNames[day]] = dayViews;
   }
 
   const hoursPoints = {
-    "0:00 - 2:00": 0,
-    "2:00 - 4:00": 0,
-    "4:00 - 6:00": 0,
-    "6:00 - 8:00": 0,
-    "8:00 - 10:00": 0,
-    "10:00 - 12:00": 0,
-    "12:00 - 14:00": 0,
-    "14:00 - 16:00": 0,
-    "16:00 - 18:00": 0,
-    "18:00 - 20:00": 0,
-    "20:00 - 22:00": 0,
-    "22:00 - 24:00": 0
+    "0-2": 0,
+    "2-4": 0,
+    "4-6": 0,
+    "6-8": 0,
+    "8-10": 0,
+    "10-12": 0,
+    "12-14": 0,
+    "14-16": 0,
+    "16-18": 0,
+    "18-20": 0,
+    "20-22": 0,
+    "22-24": 0
   };
 
   viewsData.forEach((view) => {
