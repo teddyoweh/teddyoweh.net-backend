@@ -6,7 +6,9 @@ import { Model } from 'mongoose';
 import {ViewsModel} from '../models/view.model'
 const Views = new ViewsModel().view()
 function parseDate(date){
-  return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+  const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+  const monthts = ['January','February','March','May','June','July','August','September','October','November','December']
+  return `${days[date.getDay()]} ${date.getDate()}, ${monthts[date.getMonth()]}  ${ date.getFullYear()}`
 }
 @Injectable()
 export class ViewService {
