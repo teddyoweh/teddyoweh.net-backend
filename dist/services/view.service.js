@@ -10,6 +10,9 @@ exports.ViewService = void 0;
 const common_1 = require("@nestjs/common");
 const view_model_1 = require("../models/view.model");
 const Views = new view_model_1.ViewsModel().view();
+function parseDate(date) {
+    return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+}
 let ViewService = class ViewService {
     getHello() {
         return 'Hello World!';
@@ -28,6 +31,22 @@ let ViewService = class ViewService {
         });
         newView.save();
         return {};
+    }
+    async getUserView(body) {
+        const userviews = await Views.find({
+            browserid: body.id
+        });
+        const todayDate = parseDate(new Date());
+        const hashmap = {};
+        userviews.forEach((view, index) => {
+            if (hashmap[parseDate(view.date)] == undefined) {
+                hashmap[parseDate(view.date)] = [view];
+            }
+            else {
+                hashmap[parseDate(view.date)].push(view);
+            }
+        });
+        return hashmap;
     }
 };
 ViewService = __decorate([

@@ -31,62 +31,62 @@ function calculatePoints(viewsData) {
         const monthName = new Date(0, month).toLocaleString('default', { month: 'short' });
         monthsPoints[monthName] = monthViews;
     }
-    const dayNames = ['Sun', 'Mond', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+    const dayNames = ['Sun', 'Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat'];
     for (let day = 0; day < 7; day++) {
         const dayViews = viewsData.filter((view) => view.date.getDay() === day).length;
         daysPoints[dayNames[day]] = dayViews;
     }
     const hoursPoints = {
-        "0-2": 0,
-        "2-4": 0,
-        "4-6": 0,
-        "6-8": 0,
-        "8-10": 0,
-        "10-12": 0,
-        "12-14": 0,
-        "14-16": 0,
-        "16-18": 0,
-        "18-20": 0,
-        "20-22": 0,
-        "22-24": 0
+        "0": 0,
+        "2": 0,
+        "4": 0,
+        "6": 0,
+        "8": 0,
+        "10": 0,
+        "12": 0,
+        "14": 0,
+        "16": 0,
+        "18": 0,
+        "20": 0,
+        "22": 0,
     };
     viewsData.forEach((view) => {
         const viewHour = view.date.getHours();
         if (viewHour >= 0 && viewHour < 2) {
-            hoursPoints["0-2"] += 1;
+            hoursPoints["0"] += 1;
         }
         else if (viewHour >= 2 && viewHour < 4) {
-            hoursPoints["2-4"] += 1;
+            hoursPoints["2"] += 1;
         }
         else if (viewHour >= 4 && viewHour < 6) {
-            hoursPoints["4-6"] += 1;
+            hoursPoints["4"] += 1;
         }
         else if (viewHour >= 6 && viewHour < 8) {
-            hoursPoints["6-8"] += 1;
+            hoursPoints["6"] += 1;
         }
         else if (viewHour >= 8 && viewHour < 10) {
-            hoursPoints["8-10"] += 1;
+            hoursPoints["8"] += 1;
         }
         else if (viewHour >= 10 && viewHour < 12) {
-            hoursPoints["10-12"] += 1;
+            hoursPoints["10"] += 1;
         }
         else if (viewHour >= 12 && viewHour < 14) {
-            hoursPoints["12-14"] += 1;
+            hoursPoints["12"] += 1;
         }
         else if (viewHour >= 14 && viewHour < 16) {
-            hoursPoints["14-16"] += 1;
+            hoursPoints["14"] += 1;
         }
         else if (viewHour >= 16 && viewHour < 18) {
-            hoursPoints["16-18"] += 1;
+            hoursPoints["16"] += 1;
         }
         else if (viewHour >= 18 && viewHour < 20) {
-            hoursPoints["18-20"] += 1;
+            hoursPoints["18"] += 1;
         }
         else if (viewHour >= 20 && viewHour < 22) {
-            hoursPoints["20-22"] += 1;
+            hoursPoints["20"] += 1;
         }
         else if (viewHour >= 22 && viewHour <= 23) {
-            hoursPoints["22-24"] += 1;
+            hoursPoints["22"] += 1;
         }
     });
     return {
@@ -131,7 +131,8 @@ function calculateViewsStatistics(viewsData) {
         weeklyPercentageChange,
         monthlyPercentageChange,
         totalPercentageChange,
-        date: currentDate
+        date: currentDate,
+        viewsData
     };
 }
 let HomeService = class HomeService {
@@ -144,21 +145,30 @@ let HomeService = class HomeService {
         const ViewPoints = calculatePoints(viewsData);
         try {
             const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            const todaysViews = await View.find({ date: { $gte: today } }).exec();
-            const totalViewsNo = await View.countDocuments().exec();
+            const currentDate2 = new Date();
+            const options = {
+                timeZone: 'America/Los_Angeles',
+            };
+            const currentDate1 = new Date(currentDate2.toLocaleString('en-US', options));
+            const todayStart = new Date(currentDate1.getFullYear(), currentDate1.getMonth(), currentDate1.getDate());
+            const todayEnd = new Date(currentDate1.getFullYear(), currentDate1.getMonth(), currentDate1.getDate() + 1);
+            const todaysViews = viewsData.filter((view) => view.date >= todayStart);
+            const yesterdayDate = new Date(currentDate1);
+            yesterdayDate.setDate(currentDate1.getDate() - 1);
+            const yesterdayStart = new Date(yesterdayDate.getFullYear(), yesterdayDate.getMonth(), yesterdayDate.getDate());
+            const yesterdayEnd = new Date(yesterdayDate.getFullYear(), yesterdayDate.getMonth(), yesterdayDate.getDate() + 1);
+            const yesterdayViews = viewsData.filter((view) => view.date >= yesterdayStart && view.date < yesterdayEnd);
+            const dayBeforeYesterdayDate = new Date(currentDate1);
+            dayBeforeYesterdayDate.setDate(currentDate1.getDate() - 2);
+            const dayBeforeYesterdayStart = new Date(dayBeforeYesterdayDate.getFullYear(), dayBeforeYesterdayDate.getMonth(), dayBeforeYesterdayDate.getDate());
+            const dayBeforeYesterdayEnd = new Date(dayBeforeYesterdayDate.getFullYear(), dayBeforeYesterdayDate.getMonth(), dayBeforeYesterdayDate.getDate() + 1);
+            const dayBeforeYesterdayViews = viewsData.filter((view) => view.date >= dayBeforeYesterdayStart && view.date < dayBeforeYesterdayEnd);
             const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
             const monthViewsNo = await View.countDocuments({ date: { $gte: startOfMonth } }).exec();
             const yesterday = new Date(today);
             yesterday.setDate(yesterday.getDate() - 1);
-            const yesterdayViews = await View.find({
-                date: { $gte: yesterday, $lt: today }
-            }).exec();
             const dayBeforeYesterday = new Date(yesterday);
             dayBeforeYesterday.setDate(dayBeforeYesterday.getDate() - 1);
-            const dayBeforeYesterdayViews = await View.find({
-                date: { $gte: dayBeforeYesterday, $lt: yesterday }
-            }).exec();
             const daysOfWeek = {};
             let currentDate = new Date(today);
             for (let i = 0; i < 7; i++) {
@@ -182,7 +192,6 @@ let HomeService = class HomeService {
             }
             const finalHash = {
                 todaysViews: todaysViews.reverse(),
-                totalViewsNo: totalViewsNo,
                 monthViewsNo: monthViewsNo,
                 yesterdayViews: yesterdayViews.reverse(),
                 dayBeforeYesterdayViews: {

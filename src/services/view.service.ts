@@ -5,6 +5,9 @@ import { Model } from 'mongoose';
 
 import {ViewsModel} from '../models/view.model'
 const Views = new ViewsModel().view()
+function parseDate(date){
+  return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+}
 @Injectable()
 export class ViewService {
  
@@ -27,6 +30,30 @@ export class ViewService {
     newView.save();
     return {};
   }
+
+  async getUserView(body){
+    const userviews = await Views.find({
+      browserid:body.id
+    })
+
+    const todayDate = parseDate(new Date())
+    const hashmap = {
+    
+    }
+    userviews.forEach((view,index)=>{
+
+ 
+        if(hashmap[parseDate(view.date)]==undefined){
+          hashmap[parseDate(view.date)] = [view]
+        }else{
+          hashmap[parseDate(view.date)].push(view)
+        }
+        
+    
+    })
+    return hashmap
+  }
    
 
 }
+

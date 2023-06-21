@@ -47,7 +47,6 @@ export declare class HomeService {
         } & {
             _id: import("mongoose").Types.ObjectId;
         }, never>)[];
-        totalViewsNo: number;
         monthViewsNo: number;
         yesterdayViews: (import("mongoose").Document<unknown, {}, {
             date: Date;
@@ -119,21 +118,22 @@ export declare class HomeService {
             status: string;
         };
         date: Date;
+        viewsData: any;
         monthsPoints: {};
         daysPoints: {};
         hoursPoints: {
-            "0-2": number;
-            "2-4": number;
-            "4-6": number;
-            "6-8": number;
-            "8-10": number;
-            "10-12": number;
-            "12-14": number;
-            "14-16": number;
-            "16-18": number;
-            "18-20": number;
-            "20-22": number;
-            "22-24": number;
+            "0": number;
+            "2": number;
+            "4": number;
+            "6": number;
+            "8": number;
+            "10": number;
+            "12": number;
+            "14": number;
+            "16": number;
+            "18": number;
+            "20": number;
+            "22": number;
         };
     }>;
 }

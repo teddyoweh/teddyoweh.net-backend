@@ -26,6 +26,9 @@ let ViewController = class ViewController {
     addPayment(body) {
         return this.viewService.addView(body);
     }
+    getViewsID(body) {
+        return this.viewService.getUserView(body);
+    }
 };
 __decorate([
     (0, common_1.Get)(),
@@ -41,6 +44,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], ViewController.prototype, "addPayment", null);
+__decorate([
+    (0, common_1.Post)('/id_views'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], ViewController.prototype, "getViewsID", null);
 ViewController = __decorate([
     (0, common_1.Controller)('views'),
     __metadata("design:paramtypes", [view_service_1.ViewService])

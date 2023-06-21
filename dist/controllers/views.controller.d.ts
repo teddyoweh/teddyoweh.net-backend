@@ -5,6 +5,7 @@ export declare class ViewController {
     constructor(viewService: ViewService);
     findAll(request: Request): string;
     addPayment(body: any): object;
+    getViewsID(body: any): Promise<{}>;
 }
 export declare class ReqeustController {
     getHello(request: Request): {

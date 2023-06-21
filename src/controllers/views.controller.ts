@@ -14,6 +14,10 @@ export class ViewController {
   addPayment(@Body() body: any) {
     return this.viewService.addView(body);
   }
+  @Post('/id_views')
+  getViewsID(@Body() body:any){
+    return this.viewService.getUserView(body)
+  }
 }
 
 @Controller()
